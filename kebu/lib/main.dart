@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:kebu/pages/homepage.dart';
+import 'package:kebu/pages/login.dart';
 
 void main() {
   runApp(const MyApp());
@@ -10,9 +13,14 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      
-      
+    return  ScreenUtilInit(
+      designSize: Size(375, 812), 
+      builder: (context, child) {
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          home: Homepage(),
+        );
+      },
     );
   }
 }
