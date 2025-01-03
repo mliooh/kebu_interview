@@ -14,10 +14,10 @@ class Mycard extends StatelessWidget {
         child: Container(
           height: 80.h,
           width: 90.w,
-          decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), color: Colors.orange),
+          decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), color: Color(0xFFFFA016)),
           child: Column(mainAxisAlignment:  MainAxisAlignment.center,
             children: [icon, 
-            Text(text, style: TextStyle(color: Colors.black),)],),
+            Text(text, style: TextStyle(color: Colors.black, fontSize: 14.sp),)],),
         ),
       ),
     );

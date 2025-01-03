@@ -24,7 +24,7 @@ class MyButton extends StatelessWidget {
           ),
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(30),
-              color: Colors.orange),
+              color: Color(0xFFFFA016)),
         ),
       ),
     ));
