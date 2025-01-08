@@ -38,6 +38,10 @@ dependencies:
   flutter_screenutil: ^5.9.3
   random_avatar: ^0.0.8
   flutter_native_splash: ^2.4.4
+  http: ^1.2.2
+  flutter_secure_storage: ^9.2.3
+  flutter_launcher_icons: ^0.14.2
+  
 
 dev_dependencies:
   flutter_test:
@@ -98,3 +102,8 @@ flutter_native_splash:
   android_12:
     color: "#FFA016"
     image: lib/assets/splash.png
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "lib/assets/kebu-logo.png"

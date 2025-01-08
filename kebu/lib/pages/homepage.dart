@@ -1,26 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kebu/pages/commingsoon.dart';
+import 'package:kebu/pages/logout.dart';
 import 'package:kebu/pages/searchpage.dart';
 
 import 'package:kebu/widgets/deliveries.dart';
 import 'package:kebu/widgets/mycard.dart';
 
 class Homepage extends StatefulWidget {
-  const Homepage({super.key});
+  
+  
+  Homepage({super.key});
 
   @override
   State<Homepage> createState() => _HomepageState();
 }
 
 class _HomepageState extends State<Homepage> {
+
+  
+
 // current selected/active page
   int currentIndex = 0;
 
   // navigation pages
-  final List pages = [const Home(), const Commingsoon(), const Commingsoon()];
-
-
+  final List pages = [ Home(), const Commingsoon(), Logout()];
 
   @override
   Widget build(BuildContext context) {
@@ -34,11 +38,54 @@ class _HomepageState extends State<Homepage> {
               });
             }));
   }
+
+  
 }
 
 /// homepage contents
-class Home extends StatelessWidget {
-  const Home({super.key});
+class Home extends StatelessWidget {final List<test> deliveries = [
+    const test(
+        title: "ruiru",
+        text: "your delivery, #12787868686 from Nairobi",
+        time: "nov 20 2024",
+        amount: "KES 400"),
+    const test(
+        title: "juja",
+        text: "your delivery, #12787868686 from Nairobi",
+        time: "nov 20 2024",
+        amount: "KES 700"),
+    const test(
+        title: "nakuru",
+        text: "your delivery, #12787868686 from Nairobi",
+        time: "nov 20 2024",
+        amount: "KES 1000"),
+    const test(
+        title: "kisumu",
+        text: "your delivery, #12787868686 from Nairobi",
+        time: "nov 20 2024",
+        amount: "KES 2000"),
+    const test(
+        title: "cbd",
+        text: "your delivery, #12787868686 from Nairobi",
+        time: "nov 20 2024",
+        amount: "KES 200"),
+    const test(
+        title: "altech",
+        text: "your delivery, #12787868686 from Nairobi",
+        time: "nov 20 2024",
+        amount: "KES 500"),
+    const test(
+        title: "buneri",
+        text: "your delivery, #12787868686 from Nairobi",
+        time: "nov 20 2024",
+        amount: "KES 400"),
+    const test(
+        title: "msa",
+        text: "your delivery, #12787868686 from Nairobi",
+        time: "nov 20 2024",
+        amount: "KES 4000"),
+  ];
+   Home({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +95,7 @@ class Home extends StatelessWidget {
 // app bar
 
       appBar: AppBar(
-        backgroundColor: Color(0xFFFFA016),
+        backgroundColor: const Color(0xFFFFA016),
         //backgroundColor: Colors.orange,
         elevation: 10,
         // profile pic and welcome message
@@ -67,7 +114,7 @@ class Home extends StatelessWidget {
                           borderRadius: BorderRadius.circular(30)),
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(58),
-                        child: Icon(Icons.person),
+                        child: const Icon(Icons.person),
                       ),
                     ),
                     SizedBox(width: 10.w),
@@ -84,10 +131,16 @@ class Home extends StatelessWidget {
 
                 // notification icon
 
-                Icon(
-                  Icons.notifications,
-                  color: Colors.white,
-                  size: 20.sp,
+                GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => const Commingsoon()));
+                  },
+                  child: Icon(
+                    Icons.notifications,
+                    color: Colors.white,
+                    size: 20.sp,
+                  ),
                 )
               ],
             ),
@@ -109,7 +162,7 @@ class Home extends StatelessWidget {
                   child: GestureDetector(
                     onTap: () {
                       Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => const Searchpage()));
+                          builder: (context) =>  Searchpage(cards: deliveries, )));
                     },
                     child: Container(
                       decoration: BoxDecoration(
@@ -119,7 +172,7 @@ class Home extends StatelessWidget {
                         padding: const EdgeInsets.all(20.0),
                         child: Row(
                           children: [
-                            Icon(Icons.search),
+                            const Icon(Icons.search),
                             Text(
                               "Search by tracking number",
                               style: TextStyle(
@@ -171,8 +224,8 @@ class Home extends StatelessWidget {
                 //   ),
                 // ),
 
-                const SizedBox(
-                  height: 40,
+                SizedBox(
+                  height: 20.h,
                 ),
 
                 Row(
@@ -188,88 +241,24 @@ class Home extends StatelessWidget {
                   ],
                 ),
 
-                const SizedBox(
-                  height: 20,
+                SizedBox(
+                  height: 20.h,
                 ),
 
                 // recent deliveries
-                test(
-                    title: "ruiru kimbo",
-                    text: "your delivery, #12787868686 from Nairobi",
-                    time: "nov 20 2024",
-                    amount: "KES 400"),
-
-                SizedBox(
-                  height: 20,
-                ),
-
-                test(
-                    title: "ruiru kimbo",
-                    text: "your delivery, #12787868686 from Nairobi",
-                    time: "nov 20 2024",
-                    amount: "KES 400"),
-
-                SizedBox(
-                  height: 20,
-                ),
-
-                test(
-                    title: "ruiru kimbo",
-                    text: "your delivery, #12787868686 from Nairobi",
-                    time: "nov 20 2024",
-                    amount: "KES 400"),
-
-                SizedBox(
-                  height: 20,
-                ),
-
-                test(
-                    title: "ruiru kimbo",
-                    text: "your delivery, #12787868686 from Nairobi",
-                    time: "nov 20 2024",
-                    amount: "KES 400"),
-
-                SizedBox(
-                  height: 20,
-                ),
-
-                test(
-                    title: "ruiru kimbo",
-                    text: "your delivery, #12787868686 from Nairobi",
-                    time: "nov 20 2024",
-                    amount: "KES 400"),
-
-                SizedBox(
-                  height: 20,
-                ),
-
-                test(
-                    title: "ruiru kimbo",
-                    text: "your delivery, #12787868686 from Nairobi",
-                    time: "nov 20 2024",
-                    amount: "KES 400"),
-
-                SizedBox(
-                  height: 20,
-                ),
-                test(
-                    title: "ruiru kimbo",
-                    text: "your delivery, #12787868686 from Nairobi",
-                    time: "nov 20 2024",
-                    amount: "KES 400"),
-
-                SizedBox(
-                  height: 20,
-                ),
-                test(
-                    title: "ruiru kimbo",
-                    text: "your delivery, #12787868686 from Nairobi",
-                    time: "nov 20 2024",
-                    amount: "KES 400"),
-
-                SizedBox(
-                  height: 20,
-                ),
+                ListView.builder(
+                physics: const NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                itemCount: deliveries.length,
+                itemBuilder: (context, index) {
+                  return Column(
+                    children: [
+                      deliveries[index],
+                      const SizedBox(height: 20),
+                    ],
+                  );
+                },
+              ),
 
                 // DeliveriesCard(
                 //     title: "ruiru kimbo",
@@ -286,6 +275,7 @@ class Home extends StatelessWidget {
 }
 
 class BottomnNav extends StatelessWidget {
+  
   final int currentIndex;
   final Function(int) onTap;
   const BottomnNav(
@@ -297,7 +287,7 @@ class BottomnNav extends StatelessWidget {
       currentIndex: currentIndex,
       onTap: onTap,
       type: BottomNavigationBarType.fixed, // To show all labels
-      selectedItemColor: Color(0xFFFFA016), // Highlight color
+      selectedItemColor: const Color(0xFFFFA016), // Highlight color
       unselectedItemColor: Colors.grey, // Default color
       showSelectedLabels: true,
       showUnselectedLabels: true,
@@ -305,17 +295,17 @@ class BottomnNav extends StatelessWidget {
       selectedLabelStyle: TextStyle(fontSize: 14.sp),
       unselectedFontSize: 14.sp,
       items: [
-        BottomNavigationBarItem(
+        const BottomNavigationBarItem(
           icon: Icon(
             Icons.home,
           ),
           label: 'Home',
         ),
-        BottomNavigationBarItem(
+        const BottomNavigationBarItem(
           icon: Icon(Icons.local_shipping),
           label: 'Deliveries',
         ),
-        BottomNavigationBarItem(
+        const BottomNavigationBarItem(
           icon: Icon(Icons.help),
           label: 'Profile',
         ),

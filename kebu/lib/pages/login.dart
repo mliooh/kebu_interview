@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:kebu/pages/homepage.dart';
 import 'package:kebu/pages/signup.dart';
+import 'package:kebu/services/apiservices.dart';
 import 'package:kebu/widgets/custom_textfield.dart';
 import 'package:kebu/widgets/my_button.dart';
 
@@ -18,6 +20,8 @@ class _LoginState extends State<Login> {
   String? passworderror;
   final TextEditingController phonecontroller = TextEditingController();
   final TextEditingController passwordcontroller = TextEditingController();
+  final ApiService apiService = ApiService();
+  
 
 // textfield validation for phone number and password
 
@@ -54,6 +58,50 @@ class _LoginState extends State<Login> {
     } else {
       setState(() {
         phoneerror = null;
+      });
+    }
+  }
+String? _errorMessage;
+bool _isLoading = false;
+
+  Future<void> _login() async {
+    final username = phonecontroller.text.trim();
+    final password = passwordcontroller.text.trim();
+
+    if (username.isEmpty || password.isEmpty) {
+      setState(() {
+        _errorMessage = 'Username and password are required.';
+      });
+      return;
+    }
+  
+
+  setState(() {
+      _isLoading = true;
+      _errorMessage = null;
+    });
+
+    try {
+      final tokens = await apiService.authenticate(username, password);
+      if (tokens != null) {
+        // Save tokens and navigate to the home page
+        await apiService.saveTokens(tokens['access_token'], tokens['refresh_token']);
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => Homepage()),
+        );
+      } else {
+        setState(() {
+          _errorMessage = 'Login failed. Please check your credentials.';
+        });
+      }
+    } catch (e) {
+      setState(() {
+        _errorMessage = 'An error occurred. Please try again.';
+      });
+    } finally {
+      setState(() {
+        _isLoading = false;
       });
     }
   }
@@ -144,15 +192,23 @@ class _LoginState extends State<Login> {
                 ),
 
                 // login button
-                 MyButton(text: "Log In", onTap: (){
-                  validatePhone(phonecontroller.text);
-                  passwordLength(passwordcontroller.text);
-                  if (phoneerror == null && passworderror == null) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text("Validation Successful!")),
-                  );
-                }
-                 },),
+                 Column(
+  crossAxisAlignment: CrossAxisAlignment.center,
+  children: [
+    if (_errorMessage != null) ...[
+      Text(
+        _errorMessage!,
+        style: TextStyle(color: Colors.red, fontSize: 14),
+      ),
+      SizedBox(height: 10),
+    ],
+    MyButton(
+      text: _isLoading ? "Logging in..." : "Log In", // Dynamically update text
+      onTap: _isLoading ? null : _login, // Disable the button when loading
+    ),
+  ],
+),
+
                 SizedBox(
                   height: 30.h,
                 ),
